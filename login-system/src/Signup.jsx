@@ -8,10 +8,31 @@ function Signup(){
     const[name,setName] = useState()
     const[email,setEmail] = useState()
     const[password,setPassword] = useState()
+     const [error, setError] = useState('');
     const navigate = useNavigate()
+
+    const validatePassword = (pwd) => {
+        const minLength = pwd.length >= 8;
+        const hasLetter = /[a-zA-Z]/.test(pwd);
+        const hasNumber = /\d/.test(pwd);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(pwd);
+
+        if (!minLength) return 'Password must be at least 8 characters long.';
+        if (!hasLetter) return 'Password must contain at least one letter.';
+        if (!hasNumber) return 'Password must contain at least one number.';
+        if (!hasSpecialChar) return 'Password must contain at least one special character.';
+
+        return '';
+    };
 
     const handleSubmit = (e)=>{
         e.preventDefault()
+        const validationError = validatePassword(password);
+        if (validationError) {
+            setError(validationError);
+            return;
+        }
+
         axios.post('http://localhost:3001/register',{name,email,password})
         .then(result => {console.log(result)
             navigate('/login')
@@ -62,6 +83,7 @@ function Signup(){
                         className="form-control rounded-0"
                         onChange={(e) => setPassword(e.target.value)}
                         />
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
                 </div>
                 <button type="submit" className="btn btn-success w-100 rounded-0">
                     Register
