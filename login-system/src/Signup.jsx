@@ -8,13 +8,14 @@ function Signup(){
     const[name,setName] = useState()
     const[email,setEmail] = useState()
     const[password,setPassword] = useState()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const handleSubmit = (e)=>{
         e.preventDefault()
         axios.post('http://localhost:3001/register',{name,email,password})
-        .then(result => console.log(result))
-        navigate('/login')
+        .then(result => {console.log(result)
+            navigate('/login')
+        })
         .catch(err=> console.log(err))
     }
       
