@@ -1,6 +1,6 @@
 # Node.js Sign-In/Login Application
 This is a simple Node.js application that implements user authentication through a sign-in/login page. 
-Users can register, log in, and access protected routes using JSON Web Tokens (JWT) for secure sessions. 
+Users can register, log in, and access protected routes. 
 The application is built using Express and MongoDB, making it scalable and efficient.
 
 ## Features
